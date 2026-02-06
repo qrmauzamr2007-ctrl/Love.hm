@@ -47,21 +47,59 @@ html, body {
   }
 }
 
+/* --- المستطيل الشفاف في الصفحة الرئيسية --- */
 .main-text {
   position: absolute;
   top: 6%;
-  right: 2%;
+  right: 5%;
   color: white;
-  max-width: 300px;
-  font-size: 16px;
-  line-height:1.4;
-  animation: softFade 10.5s ease forwards;
+  width: 320px;
+  max-height: 45vh; /* المستطيل واخد جزء من الشاشة */
+  overflow-y: auto; /* ده اللي بيعمل السكرول */
+  background: rgba(0, 0, 0, 0.45); /* شفافية سوداء */
+  backdrop-filter: blur(8px); /* تأثير زجاجي */
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: right;
   z-index: 2;
+  animation: softFade 2.5s ease forwards;
+}
+
+/* --- المستطيل الشفاف في صفحات الرسائل --- */
+.page-text {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  color: white;
+  width: 350px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+  line-height: 1.8;
+  z-index: 2;
+  animation: softFade 2.8s ease forwards;
+}
+
+/* تجميل شكل السكرول بار */
+.main-text::-webkit-scrollbar, .page-text::-webkit-scrollbar {
+  width: 4px;
+}
+.main-text::-webkit-scrollbar-thumb, .page-text::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
 }
 
 .buttons {
   position: absolute;
-  bottom: 10%;
+  bottom: 8%;
   right: 5%;
   display: flex;
   flex-direction: column;
@@ -79,34 +117,20 @@ html, body {
   transform: translateY(10px);
   animation: btnFade 1.5s ease forwards;
   text-align: center;
+  background: rgba(0,0,0,0.3);
 }
 
 .buttons .ghost-btn:nth-child(1) { animation-delay: 1.2s; }
 .buttons .ghost-btn:nth-child(2) { animation-delay: 1.8s; }
 
 @keyframes btnFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .ghost-btn:hover {
-  background: rgba(120, 80, 40, 0.15);
+  background: rgba(120, 80, 40, 0.3);
   transform: translateY(-2px);
   transition: 0.3s;
-}
-
-.page-text {
-  position: absolute;
-  top: 15%;
-  right: 6%;
-  color: white;
-  max-width: 390px;
-  font-size: 14px;
-  line-height: 2;
-  animation: softFade 2.8s ease forwards;
-  z-index: 2;
 }
 
 .top-bar {
@@ -116,6 +140,7 @@ html, body {
   color: white;
   cursor: pointer;
   z-index: 3;
+  font-weight: bold;
 }
 
 .password-box {
@@ -128,7 +153,7 @@ html, body {
 }
 
 .password-box input {
-  background: transparent;
+  background: rgba(0,0,0,0.5);
   border: 1.5px solid rgba(120, 80, 40, 0.7);
   padding: 12px 20px;
   color: white;
@@ -138,38 +163,34 @@ html, body {
   border-radius: 30px;
 }
 
-.password-box input::placeholder {
-  color: rgba(255,255,255,0.7);
-}
-
 .password-box .ghost-btn {
   margin-top: 15px;
   padding: 10px 22px;
   border: 1.5px solid rgba(120, 80, 40, 0.7);
   color: white;
   cursor: pointer;
-  transition: 0.3s;
   display: inline-block;
   border-radius: 30px;
 }
 
+/* --- تعديلات الموبايل --- */
 @media screen and (max-width: 600px) {
-  .main-text {
-    max-width: 90%;
-    font-size: 14px;
-    top: 5%;
+  .main-text, .page-text {
+    width: 90%;
     right: 5%;
+    left: 5%; /* توسيط المستطيل في الموبايل */
+    max-height: 45vh;
+    font-size: 17px;
   }
+  
   .buttons {
-    bottom: 8%;
+    bottom: 5%;
+    width: 90%;
     right: 5%;
-    gap: 10px;
   }
-  .page-text {
-    top: 12%;
-    right: 4%;
-    max-width: 90%;
-    font-size: 13px;
-    line-height: 1.6;
+  
+  .buttons .ghost-btn {
+    font-size: 15px;
+    padding: 12px;
   }
-}
+  }
